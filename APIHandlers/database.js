@@ -23,6 +23,17 @@ exports.createUser = function(userName, password, callBack){
   })
 }
 
+exports.getUser = function(user, done){
+  db.collection('users').find({username:user}).toArray(function(err, results){
+    if(!err){
+      console.log(results);
+      var password = results[0].password;
+      done(false, password);
+    }
+    else done(true, null)
+  })
+}
+
 function createRecord(formData){
   
     var record = formData;

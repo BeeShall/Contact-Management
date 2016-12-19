@@ -31,14 +31,16 @@ app.use(passport.initialize())
 app.use(passport.session());
 app.use(flash());
 
-authenticate.setAuthentication(passport,mongo);
-
-
 app.use(function(req,res,next){
   req.db = mongo;
   req.passport = passport;
   next();
 });
+
+authenticate.setAuthentication(passport,mongo);
+
+
+
 
 app.use('/', index);
 

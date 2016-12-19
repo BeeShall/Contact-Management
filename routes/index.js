@@ -2,7 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/mailer', function(req, res, next) {
+var ensureLoggedIn = function(req, res, next) {
+	if ( req.user ) {
+		next();
+	}
+	else {
+		res.redirect("/login");
+	}
+}
+
+router.get('/mailer',ensureLoggedIn, function(req, res, next) {
   var invalid = false;
   
   
@@ -18,17 +27,23 @@ router.get('/mailer', function(req, res, next) {
 router.get('/', function(req,res,next){
   res.render('login')
 })
+ router.get('/login', function(req,res,next){
+  res.render('login')
+})
 
 router.post('/authenticate', function(req,res,next){
   console.log(req.body.username)
   console.log(req.body.password)
+  console.log(req.db)
   var passport = req.passport;
-  passport.authenticate('local', { successRedirect: '/mailer',
+  var a = passport.authenticate('local', { successRedirect: '/mailer',
                                      failureRedirect: '/login',
                                   })
+  a(req,res);
+  
 })
 
-router.post('/submit', function(req, res, next) {
+router.post('/submit', ensureLoggedIn, function(req, res, next) {
   var mongo = req.db;
   
   mongo.addContact(req.body, function(done){
@@ -40,7 +55,7 @@ router.post('/submit', function(req, res, next) {
   });
 });
 
-router.post('/addRecord', function(req,res,next){
+router.post('/addRecord', ensureLoggedIn, function(req,res,next){
   var mongo = req.db;
 
 
@@ -54,7 +69,7 @@ router.post('/addRecord', function(req,res,next){
   })
 })
 
-router.get('/contacts', function(req,res,next){
+router.get('/contacts', ensureLoggedIn, function(req,res,next){
   res.render('contacts');
 });
 
@@ -67,7 +82,7 @@ router.post('/createUser', function(req,res,next){
   })
 });
 
-router.get('/contactData', function(req, res, next) {
+router.get('/contactData', ensureLoggedIn, function(req, res, next) {
   var mongo = req.db;
   mongo.getAllContacts(function(data){
       console.log(data)
@@ -76,7 +91,7 @@ router.get('/contactData', function(req, res, next) {
 
 });
 
-router.post('/updateContact', function(req,res,next){
+router.post('/updateContact', ensureLoggedIn, function(req,res,next){
     var mongo = req.db;
     mongo.updateContact(req.body, function(done, contact){
       if(!done) res.send({valid:false})
@@ -89,7 +104,7 @@ router.post('/updateContact', function(req,res,next){
     })
   });
 
-router.post('/deleteContact', function(req,res,next){
+router.post('/deleteContact',ensureLoggedIn, function(req,res,next){
   var mongo = req.db;
   mongo.deleteContact(req.body.id,function(done){
     res.send({status:done})
