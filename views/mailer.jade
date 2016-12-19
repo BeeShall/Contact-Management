@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .container-fluid
+        form(method='post', action='/submit')
+            include contactForm
+            .form-group-row
+                .col-xs-2
+                    if invalid
+                        span.text-danger.lead Invalid address
+                    button.btn-info.form-control(type='submit')  Add

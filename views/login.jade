@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+        link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous")
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        .container
+            #pwd-container.row
+                .col-xs-12
+                section.login-form
+                    form(method='post', action='/authenticate', role='login')
+                        .form-group.row
+                            input.form-control.input-lg(type='text', name='username', placeholder='Username', required='')
+                        .form-group.row
+                            input#password.form-control.input-lg(type='password', name="password", placeholder='Password', required='')
+                        .form-group.row
+                            button.btn.btn-lg.btn-primary.btn-block(type='submit', name='go') Sign in
+                        

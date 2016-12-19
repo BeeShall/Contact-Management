@@ -1,0 +1,19 @@
+body{
+    height: 100%
+}
+
+#contactList{
+    max-height: 50%;
+}
+
+table{
+
+    overflow: auto;
+}
+#map{
+    width: 100%;
+    min-height: 500px;
+    min-width: 400px;
+    height: 100%
+}
+

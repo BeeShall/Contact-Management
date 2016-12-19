@@ -1,0 +1,52 @@
+- var states = ['AK', 'AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA','MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT','VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+.form-group.row
+    label.col-xs-4.col-form-label(for='prefix') Prefix
+    .col-xs-2
+        select#prefix.form-control(name='prefix', ng-model="record.prefix")
+            option Mr.
+            option Mrs.
+            option Ms.
+            option Dr.
+.form-group.row
+    label.col-xs-4.col-form-label(for='fName') First Name
+    .col-xs-6
+        input#fName.form-control(name='fName', ng-model="record.fName" type='text', value='John')
+.form-group.row
+    label.col-xs-4.col-form-label(for='lName') Last Name
+    .col-xs-6
+        input#lName.form-control(name='lName', ng-model="record.lName", type='text', value='Doe')
+.form-group.row
+    label.col-xs-4.col-form-label(for='street') Street
+    .col-xs-6
+        input#street.form-control(name='street', ng-model="record.street", type='text', value='505 Ramapo Valley Road')
+.form-group.row
+    label.col-xs-4.col-form-label(for='city') City
+    .col-xs-6
+        input#city.form-control(name='city', ng-model="record.city", type='text', value='Mahwah')
+.form-group.row
+    label.col-xs-4.col-form-label(for='state') State
+    .col-xs-2.dropdown.btn-group
+        select#state.form-control(name='state', ng-model="record.state")
+            each state in states
+                option= state
+.form-group.row
+    label.col-xs-4.col-form-label(for='zip') Zip
+    .col-xs-6
+        input#zip.form-control(name ='zip', ng-model="record.zip", type='text', value='07430')
+.form-group.row
+    label.col-xs-4.col-form-label(for='phone') Phone
+    .col-xs-6
+        input#phone.form-control(name='phone', ng-model="record.phone" type='tel', value='123-456-7890')
+.form-group.row
+    label.col-xs-4.col-form-label(for='email') Email
+    .col-xs-6
+        input#phone.form-control(name ='email', ng-model="record.email", type='email', value='abc@xyz.com')
+.form-group.row
+    label.col-xs-4.col-form-label(for='contact') Contact By
+    .col-xs-6
+        select#contact.selectpicker.form-control(name ='contact', ng-model="record.contact" multiple=true) 
+            option Phone
+            option Email
+            option Mail
+.form-group.row
+   

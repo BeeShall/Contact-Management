@@ -1,0 +1,103 @@
+extends layout
+
+block headContent
+    link(rel='stylesheet', href='/stylesheets/contactsStyle.css')
+    script(src="https://maps.googleapis.com/maps/api/js")
+
+
+block content
+    section(ng-app="myApp")
+        section.container-fluid(id= 'contactList' ng-controller="listController")
+            div.row
+                span.col-xs-5
+                    input.form-control(type= 'text', placeholder= "Search By First Name", ng-model="Filter.fName")
+                span.col-xs-5
+                    input.form-control(type= 'text', placeholder= "Search By Last Name", ng-model="Filter.lName")
+                span.col-xs-2
+                    button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#addModal', ng-click="clearScopeData()") Add New
+                    #addModal.modal.fade(role='dialog')
+                        .modal-dialog.modal-lg
+                            .modal-content
+                                .modal-header
+                                    button.close(type='button', ng-click="clearScopeData()" , data-dismiss='modal') ×
+                                    h4.modal-title Add new Contact
+                                .modal-body
+                                    .container-fluid
+                                        form
+                                            include contactForm
+                                            .modal-footer
+                                                .col-xs-2
+                                                    .span#addError(ng-show="invalid") Invalid Address
+                                                    button.btn-info.form-control(ng-click="addRecord()")  Add
+            div.row
+                span.col-xs-5
+                    input.form-control(type= 'text', placeholder= "Search By Address", ng-model="addressFilter.address")
+                span.col-xs-4
+                    select.selectpicker.form-control(name ='contact', ng-model="addressFilter.distance") 
+                        option 5
+                        option 10
+                        option 25
+                span.col-xs-2
+                    button.btn.btn-info.btn-lg(type='button', ng-click='applyFilter($event)') Find
+                    button.btn.btn-info.btn-lg(type='button', ng-click='clearFilter()') Clear
+            table.table.table-hover.table-responsive
+                thead
+                    tr
+                        th Prefix
+                        th First Name
+                        th Last Name
+                        th Street
+                        th City
+                        th State
+                        th Zip
+                        th Phone
+                        th Email
+                        th Contact By Mail
+                        th Contact By Email
+                        th Contact By Phone
+                tbody
+                    tr(ng-repeat= 'contact in records | filter: Filter | filter: coordsFilter', ng-click="reCenter(contact.coords)")
+                        td {{contact.prefix}}
+                        td {{contact.fName}}
+                        td {{contact.lName}}
+                        td {{contact.street}}
+                        td {{contact.city}}
+                        td {{contact.state}}
+                        td {{contact.zip}}
+                        td {{contact.phone}}
+                        td {{contact.email}}
+                        td {{contact.contactByMail}} 
+                        td {{contact.contactByEmail}}
+                        td {{contact.contactByPhone}}
+                        td 
+                            span
+                                button.btn.btn-info.btn-lg(type='button', ng-click="populateRecord(contact)", data-toggle='modal', data-target='#updateModal') Update
+                                #updateModal.modal.fade(role='dialog')
+                                    .modal-dialog.modal-lg
+                                        .modal-content
+                                            .modal-header
+                                                button.close(type='button', ng-click="clearScopeData()",  data-dismiss='modal') ×
+                                                h4.modal-title Update Contact
+                                            .modal-body
+                                                .container-fluid
+                                                    form
+                                                        include contactForm
+                                                        .modal-footer
+                                                            .col-xs-2
+                                                                .span#updateError(ng-show="invalid") Invalid Address
+                                                                button.btn.btn-info(ng-click="updateRecord($event)")  Update
+                                                                
+                            span
+                                button.btn.btn-danger.btn-lg(ng-click="deleteRecord($event,contact)") Delete
+                           
+            
+        section(id= 'mapSection' ng-controller="mapsController") 
+            div(id="map")
+    script(src="/javascripts/contactsController.js")
+    
+
+    
+
+    
+
+            
