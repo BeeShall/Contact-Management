@@ -16,7 +16,7 @@
     "mongodb": "*",
     "@google/maps": "*",
     "express-session": "*",
-    "bcryptjs" : "*",
+    "bcryptjs" : "latest",
     "passport": "~0.1.17",
     "passport-local" : "~0.1.6",
     "connect-flash" : "~0.1.1"

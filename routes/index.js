@@ -55,6 +55,12 @@ router.post('/submit', ensureLoggedIn, function(req, res, next) {
   });
 });
 
+router.get('/logout', function(req,res,next){
+  req.logout();
+  res.redirect("/login");
+
+})
+
 router.post('/addRecord', ensureLoggedIn, function(req,res,next){
   var mongo = req.db;
 
