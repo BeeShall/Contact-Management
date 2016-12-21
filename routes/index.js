@@ -74,7 +74,6 @@ router.get('/contacts', ensureLoggedIn, function(req,res,next){
 });
 
 router.post('/createUser', function(req,res,next){
-  console.log(req)
   req.authenticate.createUser(req.db, req.body.username, req.body.password, function(success){
     if(success){
       res.send("success");

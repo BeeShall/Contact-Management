@@ -2,7 +2,7 @@ var mongodb = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 var Geocoder = require("./geocode.js");
 var db;
-var url = 'mongodb://localhost:27017/contacts';
+var url = 'mongodb://beeshall:bishal@ds141128.mlab.com:41128/contacts';
 MongoClient.connect(url, function(err, database) {
   if(!err){
     console.log("Connected correctly to server.");
